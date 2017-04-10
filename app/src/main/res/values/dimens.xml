@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="testSizeSubheading">16sp</dimen>
+    <dimen name="testSizeCaption">12sp</dimen>
+    <dimen name="testSizeHeading">18sp</dimen>>
+    <dimen name="testSizeMain">40sp</dimen>
+</resources>

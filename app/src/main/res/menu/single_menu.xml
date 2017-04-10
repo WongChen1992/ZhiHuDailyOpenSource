@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/starred"
+        android:icon="@mipmap/ic_favorite_border_white_24dp"
+        android:title="@string/tab_starred"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/collection"
+        android:icon="@mipmap/ic_star_border_white_24dp"
+        android:title="@string/tab_collection"
+        app:showAsAction="always" />
+</menu>

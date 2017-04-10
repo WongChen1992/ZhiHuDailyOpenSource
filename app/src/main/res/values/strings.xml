@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">知乎日报</string>
+    <string name="tab_news">发现</string>
+    <string name="tab_starred">要闻</string>
+    <string name="tab_collection">收藏</string>
+
+    <string name="help">帮助</string>
+    <string name="feedback">反馈</string>
+    <string name="settings">设置</string>
+    <string name="delete">删除 </string>
+</resources>

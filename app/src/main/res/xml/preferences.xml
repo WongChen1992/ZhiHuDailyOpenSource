@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings">
+    <PreferenceCategory android:title="@string/settings">
+        <Preference
+            android:layout="@layout/layout_preference"
+            android:summary="将删除阅读痕迹及离线文章，不涉及已标记收藏的文章"
+            android:title="清除缓存" />
+
+        <Preference
+            android:key="version"
+            android:layout="@layout/layout_preference"
+            android:title="版本更新" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/help">
+        <Preference
+            android:layout="@layout/layout_preference"
+            android:summary="阅后即从要闻列表删，相当于对日报列表进行感兴趣的二次筛选，进行将要阅读的标记"
+            android:title="要闻功能" />
+        <Preference
+            android:layout="@layout/layout_preference"
+            android:summary="永久收藏于列表除非手动删除，适用于间隔长时间仍需要参阅的文章"
+            android:title="收藏功能" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/feedback">
+        <Preference
+        android:layout="@layout/layout_preference"
+        android:summary="wongchen1992@gmail.com"
+        android:title="邮箱" />
+        <Preference
+            android:layout="@layout/layout_preference"
+            android:summary="git.com"
+            android:title="GitHub" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorAccent">#009688</color>
+    <color name="textColorPrimary">@android:color/white</color>
+    <color name="windowBackground">#F9F9F9</color>
+
+    <color name="colorTabNormalColor">#B3FFFFFF</color>
+    <color name="colorTabSelectedColor">#FFFFFF</color>
+
+
+    <color name="colorTextTitle">#DE000000</color>
+    <color name="colorTextCaption">#8A000000</color>
+</resources>
