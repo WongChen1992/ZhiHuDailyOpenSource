@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingRight="?android:attr/scrollbarSize">
+    android:paddingRight="?android:attr/scrollbarSize"
+    tools:ignore="RtlHardcoded,RtlSymmetry"
+    android:baselineAligned="false">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dip"
         android:layout_marginLeft="15dip"
         android:layout_marginRight="6dip"
         android:layout_marginTop="6dip"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:ignore="RtlHardcoded">
 
         <TextView
             android:id="@android:id/title"
@@ -21,10 +25,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/background_floating_material_dark"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLines="1"
+            tools:ignore="PrivateResource" />
 
         <TextView
             android:id="@android:id/summary"
@@ -34,7 +39,8 @@
             android:layout_below="@android:id/title"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/material_grey_600"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="PrivateResource,RtlHardcoded" />
 
     </RelativeLayout>
 
