@@ -78,7 +78,6 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
 
     @Override
     public void upDateRecyclerView(List<ListNews.StoriesEntity> data) {
-        Log.i("====",data.size()+"");
         mDatas.clear();
         mDatas.addAll(data);
         mNewsAdapter.notifyDataSetChanged();
