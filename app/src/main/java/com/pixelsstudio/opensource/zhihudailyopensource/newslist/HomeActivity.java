@@ -57,6 +57,23 @@ public class HomeActivity extends BaseActivity {
         mViewPager.setOffscreenPageLimit(mViewPager.getChildCount());
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                fragments.get(position).onResume();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
         new NewsListPresenter(newsListFragment);
         new StarredPresenter(starredFragment);

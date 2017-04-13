@@ -13,11 +13,16 @@ import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.NewsDetails;
 public class NewsDetailsContract {
     interface View extends BaseView<NewsDetailsContract.Presenter> {
         void showNewsDetails(NewsDetails data);
+        void setStarredImg(boolean isStarred);
+        void setCollectionImg(boolean isCollection);
+        void showToast(String str);
     }
 
     interface Presenter{
         void getData(int id);
-        void starred(Context context, ListNews.StoriesEntity newsBean);
-        void collection(Context context,ListNews.StoriesEntity newsBean);
+        void starred(Context context, boolean isCheck);
+        void collection(Context context, boolean isCheck);
+        void checkStarred(Context context);
+        void checkCollection(Context context);
     }
 }

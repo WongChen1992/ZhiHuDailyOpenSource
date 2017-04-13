@@ -123,6 +123,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public boolean query(String tableName, String[] columnName) {
+        Cursor cursor = getReadableDatabase().query(tableName, null, "newsId=?", columnName, null, null, null);
+        return cursor.getCount() != 0 ? true : false;
+    }
+
     public List<ListNews.StoriesEntity> queryAll(String tableName){
         List<ListNews.StoriesEntity> dataList = new ArrayList<>();
         Cursor cursor = db.query(tableName,  null, null, null, null, null, null);

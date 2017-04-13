@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
@@ -77,6 +78,7 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
 
     @Override
     public void upDateRecyclerView(List<ListNews.StoriesEntity> data) {
+        Log.i("====",data.size()+"");
         mDatas.clear();
         mDatas.addAll(data);
         mNewsAdapter.notifyDataSetChanged();
@@ -114,4 +116,9 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
         mPresenter = checkNotNull(presenter);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        mPresenter.getData(mContext);
+    }
 }

@@ -105,4 +105,10 @@ public class CollectionFragment extends BaseFragment implements CollectionContra
     public void setPresenter(CollectionContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        mPresenter.getData(mContext);
+    }
 }

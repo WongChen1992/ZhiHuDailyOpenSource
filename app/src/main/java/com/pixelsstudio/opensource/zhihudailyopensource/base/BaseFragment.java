@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
     public Context mContext;
+    public Context appContext;
     protected View mView;
 
     @Override
@@ -26,6 +27,7 @@ public abstract class BaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(getLayoutId(), container, false);
         mContext = getActivity();
+        appContext = mContext.getApplicationContext();
         initView();
         return mView;
     }

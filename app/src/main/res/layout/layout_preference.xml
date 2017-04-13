@@ -4,18 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
+    android:background="@android:color/white"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingRight="?android:attr/scrollbarSize"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:ignore="RtlHardcoded,RtlSymmetry"
     android:baselineAligned="false">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dip"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="6dip"
-        android:layout_marginTop="6dip"
         android:layout_weight="1"
         tools:ignore="RtlHardcoded">
 
