@@ -71,7 +71,7 @@ public class NewsDetailsPresenter implements NewsDetailsContract.Presenter{
     @Override
     public void collection(Context context, boolean isCheck) {
         if (isCheck){
-            if( SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_STARRED,new String[]{Integer.toString(mNewsDetails.getId())}) != 0){
+            if( SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_COLLECTION,new String[]{Integer.toString(mNewsDetails.getId())}) != 0){
                 mNewsDetailsView.showToast("删除成功");
                 mNewsDetailsView.setCollectionImg(false);
             }else{
@@ -79,7 +79,7 @@ public class NewsDetailsPresenter implements NewsDetailsContract.Presenter{
             }
             return;
         }
-        if(SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_STARRED,mNewsDetails.getId(),mNewsBean) != -1){
+        if(SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_COLLECTION,mNewsDetails.getId(),mNewsBean) != -1){
             mNewsDetailsView.showToast("添加成功");
             mNewsDetailsView.setCollectionImg(true);
         }else{

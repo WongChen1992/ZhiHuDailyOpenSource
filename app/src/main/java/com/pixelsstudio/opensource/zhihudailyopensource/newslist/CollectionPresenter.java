@@ -26,6 +26,7 @@ public class CollectionPresenter implements CollectionContract.Presenter{
 
     @Override
     public void getData(Context context) {
+        mDatas.clear();
         mDatas.addAll(SQLiteDBHelper.getInstens(context).queryAll(SQLiteDBHelper.TABLE_COLLECTION));
         mCollectionView.upDateRecyclerView(mDatas);
     }

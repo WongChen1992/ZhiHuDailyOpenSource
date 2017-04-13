@@ -27,6 +27,7 @@ public class StarredPresenter implements StarredContract.Presenter{
 
     @Override
     public void getData(Context context) {
+        mDatas.clear();
         mDatas.addAll(SQLiteDBHelper.getInstens(context).queryAll(SQLiteDBHelper.TABLE_STARRED));
         mStarredView.upDateRecyclerView(mDatas);
     }
