@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
  * Created by WongChen on 2017/1/12.
  */
 
-public class RecyclerViewMaseter extends RecyclerView {
+public class RecyclerViewMaster extends RecyclerView {
     private DividerDecoration mDividerDecoration;
     private View mEmptyView;
     private AdapterDataObserver mObserver = new AdapterDataObserver() {
@@ -28,10 +27,10 @@ public class RecyclerViewMaseter extends RecyclerView {
             Adapter adapter = getAdapter();
             if (adapter.getItemCount() == 0) {
                 mEmptyView.setVisibility(VISIBLE);
-                RecyclerViewMaseter.this.setVisibility(GONE);
+                RecyclerViewMaster.this.setVisibility(GONE);
             } else {
                 mEmptyView.setVisibility(GONE);
-                RecyclerViewMaseter.this.setVisibility(VISIBLE);
+                RecyclerViewMaster.this.setVisibility(VISIBLE);
             }
         }
 
@@ -62,7 +61,7 @@ public class RecyclerViewMaseter extends RecyclerView {
     };
 
 
-    public RecyclerViewMaseter(Context context, @Nullable AttributeSet attrs) {
+    public RecyclerViewMaster(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mDividerDecoration = new DividerDecoration(context);
         addItemDecoration(mDividerDecoration);

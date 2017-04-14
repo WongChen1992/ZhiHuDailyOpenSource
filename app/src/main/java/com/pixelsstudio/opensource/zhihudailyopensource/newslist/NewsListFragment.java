@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
@@ -18,7 +19,7 @@ import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapterWrapp
 import com.pixelsstudio.opensource.zhihudailyopensource.base.BaseFragment;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
 import com.pixelsstudio.opensource.zhihudailyopensource.newsdetails.NewsDetailsActivity;
-import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaseter;
+import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,9 @@ import static com.facebook.common.internal.Preconditions.checkNotNull;
  */
 
 public class NewsListFragment extends BaseFragment implements NewsListContract.View {
-    //TODO V和P相互持有算MVP吗
     private NewsListContract.Presenter mPresenter;
     private SwipeRefreshLayout srl;
-    private RecyclerViewMaseter mRecyclerView;
+    private RecyclerViewMaster mRecyclerView;
     private NewsAdapterWrapper mNewsAdapterWrapper;
     private NewsAdapter mNewsAdapter;
     private List<ListNews.StoriesEntity> mDatas = new ArrayList<>();
@@ -56,16 +56,17 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
             }
         });
 
-        mRecyclerView = (RecyclerViewMaseter) mView.findViewById(R.id.rv);
+        mRecyclerView = (RecyclerViewMaster) mView.findViewById(R.id.rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
-        mNewsAdapter = new NewsAdapter(mContext,mDatas);
+        mNewsAdapter = new NewsAdapter(mContext,mDatas,this);
         mNewsAdapter.setOnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(int id) {
-                //TODO 应不应该在View中写跳转接口
+            public void onItemClick(ListNews.StoriesEntity data) {
+                mPresenter.read(mContext,data);
+                mNewsAdapterWrapper.notifyItemChanged(mDatas.indexOf(data));
                 Intent intent = new Intent(mContext, NewsDetailsActivity.class);
-                intent.putExtra("id",id);
+                intent.putExtra("id",data.getId());
                 startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.pixelsstudio.opensource.zhihudailyopensource.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
+import com.pixelsstudio.opensource.zhihudailyopensource.db.SQLiteDBHelper;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
+import com.pixelsstudio.opensource.zhihudailyopensource.newslist.NewsListFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +26,14 @@ import java.util.Map;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> implements View.OnClickListener, View.OnLongClickListener {
     private List<ListNews.StoriesEntity> mDatas;
     private Context mContext;
+    private Fragment mFragment;
     private OnRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
     private OnRecyclerViewItemLongClickListener mOnRecyclerViewItemLongClickListener = null;
 
-    public NewsAdapter(Context context, List<ListNews.StoriesEntity> data) {
+    public NewsAdapter(Context context, List<ListNews.StoriesEntity> data, Fragment fm) {
         mContext = context;
         mDatas = data;
+        mFragment = fm;
     }
 
     @Override
@@ -41,13 +46,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(NewsAdapter.NewsViewHolder holder, int position) {
+        //首页列表将进行是否为已读文章判断
+        if (mFragment.getClass().equals(NewsListFragment.class)){
+            if(SQLiteDBHelper.getInstens(mContext).query(SQLiteDBHelper.TABLE_READ,new String[]{String.valueOf(mDatas.get(position).getId())})){
+                holder.tv_title.setTextColor(mContext.getResources().getColor(R.color.colorTextCaption));
+            }else{
+                holder.tv_title.setTextColor(mContext.getResources().getColor(R.color.colorTextTitle));
+            }
+        }
         holder.itemView.setOnClickListener(this);
         holder.itemView.setOnLongClickListener(this);
         holder.tv_title.setText(mDatas.get(position).getTitle());
         holder.iv_poster.setImageURI(Uri.parse(mDatas.get(position).getImages().get(0)));
         Map<String, Object> data = new HashMap<>();
-//        data.put("position", position);
-        data.put("id", mDatas.get(position).getId());
         data.put("data", mDatas.get(position));
         holder.itemView.setTag(data);
 
@@ -61,7 +72,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onClick(View v) {
         if (mOnRecyclerViewItemClickListener != null) {
-            mOnRecyclerViewItemClickListener.onItemClick((Integer) ((HashMap) v.getTag()).get("id"));
+            if (mFragment.getClass().equals(NewsListFragment.class)){}
+            mOnRecyclerViewItemClickListener.onItemClick((ListNews.StoriesEntity) ((HashMap) v.getTag()).get("data"));
         }
     }
 
@@ -82,7 +94,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(int id);
+        void onItemClick(ListNews.StoriesEntity data);
     }
 
     public interface OnRecyclerViewItemLongClickListener {

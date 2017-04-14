@@ -90,4 +90,9 @@ public class NewsListPresenter implements NewsListContract.Presenter {
         }
     }
 
+    @Override
+    public void read(Context context, ListNews.StoriesEntity newsBean) {
+        SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_READ,newsBean.getId(),newsBean);
+    }
+
 }

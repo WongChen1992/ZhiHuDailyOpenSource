@@ -6,14 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
 import com.pixelsstudio.opensource.zhihudailyopensource.base.BaseFragment;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
 import com.pixelsstudio.opensource.zhihudailyopensource.newsdetails.NewsDetailsActivity;
-import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaseter;
+import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ import static com.facebook.common.internal.Preconditions.checkNotNull;
 public class StarredFragment extends BaseFragment implements StarredContract.View{
     private StarredContract.Presenter mPresenter;
     private SwipeRefreshLayout srl;
-    private RecyclerViewMaseter mRecyclerView;
+    private RecyclerViewMaster mRecyclerView;
     private NewsAdapter mNewsAdapter;
     private List<ListNews.StoriesEntity> mDatas = new ArrayList<>();
     private ListNews.StoriesEntity mData;//存储点击item的数据
@@ -42,15 +41,15 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
         srl = (SwipeRefreshLayout) mView.findViewById(R.id.srl);
         srl.setColorSchemeResources(R.color.colorPrimary);
 
-        mRecyclerView = (RecyclerViewMaseter) mView.findViewById(R.id.rv);
+        mRecyclerView = (RecyclerViewMaster) mView.findViewById(R.id.rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
-        mNewsAdapter = new NewsAdapter(mContext,mDatas);
+        mNewsAdapter = new NewsAdapter(mContext,mDatas,this);
         mNewsAdapter.setOnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(int id) {
+            public void onItemClick(ListNews.StoriesEntity data) {
                 Intent intent = new Intent(mContext, NewsDetailsActivity.class);
-                intent.putExtra("id",id);
+                intent.putExtra("id",data.getId());
                 startActivity(intent);
             }
         });

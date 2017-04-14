@@ -25,6 +25,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     public static final String TABLE_STARRED = "starred";
     public static final String TABLE_COLLECTION = "collection";
+    public static final String TABLE_READ = "read";//已读列表
     private static SQLiteDBHelper mSQLiteDBHelper = null;
     private SQLiteDatabase db;
 
@@ -48,8 +49,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         String _strSQL = "create table "
                 + TABLE_COLLECTION
                 + "(newsId text primary key, newsData text)";
+        String __strSQL = "create table "
+                + TABLE_READ
+                + "(newsId text primary key, newsData text)";
         db.execSQL(strSQL);
         db.execSQL(_strSQL);
+        db.execSQL(__strSQL);
     }
 
 

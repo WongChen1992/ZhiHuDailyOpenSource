@@ -26,6 +26,7 @@ public interface NewsListContract {
         void loadMoreData();
         void starred(Context context, ListNews.StoriesEntity newsBean);
         void collection(Context context,ListNews.StoriesEntity newsBean);
+        void read(Context context,ListNews.StoriesEntity newsBean);
     }
 
 }
