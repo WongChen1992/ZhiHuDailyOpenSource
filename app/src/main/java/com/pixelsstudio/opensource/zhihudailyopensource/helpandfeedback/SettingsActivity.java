@@ -20,7 +20,6 @@ public class SettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        //TODO为什么这里要设置颜色而之前就不用
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.settings);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.textColorPrimary));

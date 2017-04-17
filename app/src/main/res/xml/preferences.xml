@@ -12,7 +12,13 @@
             android:key="version"
             android:layout="@layout/layout_preference"
             android:title="版本更新" />
-    </PreferenceCategory>
+
+        <SwitchPreference
+            android:layout="@layout/layout_preference"
+            android:defaultValue="true"
+            android:key="switch"
+            android:title="要闻阅后从列表删除" />
+   </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/help"
         android:layout="@layout/layout_preference_title">

@@ -9,9 +9,12 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  */
 
 public class AppContext extends Application {
+    public boolean isReadDelete;//要闻是否为阅后删除
+
     @Override
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
+        //TODO 初始化isReadDelete
     }
 }

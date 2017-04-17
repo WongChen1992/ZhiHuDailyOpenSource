@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin">
+    android:paddingTop="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@android:id/title"

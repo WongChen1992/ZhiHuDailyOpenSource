@@ -24,5 +24,6 @@ public class StarredContract {
         void getData(Context context);
         void collection(Context context, ListNews.StoriesEntity newsBean);
         void delete(Context context,ListNews.StoriesEntity newsBean);
+        void delete(Context context,ListNews.StoriesEntity newsBean,boolean isReadDelete);//不提示toast的删除
     }
 }

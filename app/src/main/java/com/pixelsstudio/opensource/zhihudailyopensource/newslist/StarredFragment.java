@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
+import com.pixelsstudio.opensource.zhihudailyopensource.app.AppContext;
 import com.pixelsstudio.opensource.zhihudailyopensource.base.BaseFragment;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
 import com.pixelsstudio.opensource.zhihudailyopensource.newsdetails.NewsDetailsActivity;
@@ -48,6 +49,7 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
         mNewsAdapter.setOnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(ListNews.StoriesEntity data) {
+                mPresenter.delete(appContext,data,((AppContext)appContext).isReadDelete);
                 Intent intent = new Intent(mContext, NewsDetailsActivity.class);
                 intent.putExtra("id",data.getId());
                 startActivity(intent);

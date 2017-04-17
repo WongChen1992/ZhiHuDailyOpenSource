@@ -52,4 +52,12 @@ public class StarredPresenter implements StarredContract.Presenter{
             mStarredView.showToast("删除失败");
         }
     }
+
+    @Override
+    public void delete(Context context, ListNews.StoriesEntity newsBean, boolean isReadDelete) {
+        if (!isReadDelete)
+            return;
+        mDatas.remove(newsBean);
+        SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_STARRED,new String[]{Integer.toString(newsBean.getId())});
+    }
 }
