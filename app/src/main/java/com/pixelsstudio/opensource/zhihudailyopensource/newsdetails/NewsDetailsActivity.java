@@ -3,7 +3,11 @@ package com.pixelsstudio.opensource.zhihudailyopensource.newsdetails;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.transition.ChangeBounds;
+import android.transition.Slide;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -42,6 +46,17 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
         iv_poster = (SimpleDraweeView) findViewById(R.id.iv_poster);
         int id = getIntent().getExtras().getInt("id");
         mPresenter.getData(id);
+
+        ViewCompat.setTransitionName(iv_poster, "img");
+
+//        Slide slide = new Slide();
+//        slide.setDuration(500);
+//
+        ChangeBounds changeBounds = new ChangeBounds();
+        changeBounds.setDuration(500);
+//
+//        getWindow().setEnterTransition(slide);
+        getWindow().setSharedElementEnterTransition(changeBounds);
     }
 
     @Override
@@ -109,7 +124,8 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+//        finishAfterTransition();
+        ActivityCompat.finishAfterTransition(this);
         return super.onSupportNavigateUp();
     }
 }

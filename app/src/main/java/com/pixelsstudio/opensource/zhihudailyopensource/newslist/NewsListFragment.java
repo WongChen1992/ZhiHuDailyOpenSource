@@ -1,11 +1,17 @@
 package com.pixelsstudio.opensource.zhihudailyopensource.newslist;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,12 +19,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapterWrapper;
 import com.pixelsstudio.opensource.zhihudailyopensource.base.BaseFragment;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
 import com.pixelsstudio.opensource.zhihudailyopensource.newsdetails.NewsDetailsActivity;
+import com.pixelsstudio.opensource.zhihudailyopensource.test.Ac2;
 import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaster;
 
 import java.util.ArrayList;
@@ -65,9 +73,21 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
             public void onItemClick(ListNews.StoriesEntity data) {
                 mPresenter.read(mContext,data);
                 mNewsAdapterWrapper.notifyItemChanged(mDatas.indexOf(data));
-                Intent intent = new Intent(mContext, NewsDetailsActivity.class);
+
+//               View itemView =  mRecyclerView.getLayoutManager().findViewByPosition(mDatas.indexOf(data));
+//                SimpleDraweeView sdv = (SimpleDraweeView) itemView.findViewById(R.id.iv_poster);
+//                SimpleDraweeView sdv = mNewsAdapter.getSv();
+
+                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
                 intent.putExtra("id",data.getId());
-                startActivity(intent);
+                ViewCompat.setTransitionName( mNewsAdapter.getSv(), "img");
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(getActivity(),  mNewsAdapter.getSv(), "img");
+                ActivityCompat.startActivity(getActivity(),intent, options.toBundle());
+
+//                Intent intent = new Intent(mContext, NewsDetailsActivity.class);
+//                intent.putExtra("id",data.getId());
+//                startActivity(intent);
             }
         });
         mNewsAdapter.setOnRecyclerViewItemLongClickListener(new NewsAdapter.OnRecyclerViewItemLongClickListener() {

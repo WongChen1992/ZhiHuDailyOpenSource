@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(NewsAdapter.NewsViewHolder holder, int position) {
+    public void onBindViewHolder(final NewsAdapter.NewsViewHolder holder, int position) {
         //首页列表将进行是否为已读文章判断
         if (mFragment.getClass().equals(NewsListFragment.class)){
             if(SQLiteDBHelper.getInstens(mContext).query(SQLiteDBHelper.TABLE_READ,new String[]{String.valueOf(mDatas.get(position).getId())})){
@@ -54,7 +55,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 holder.tv_title.setTextColor(mContext.getResources().getColor(R.color.colorTextTitle));
             }
         }
-        holder.itemView.setOnClickListener(this);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("====","ggg");
+                sv = holder.iv_poster;
+                if (mOnRecyclerViewItemClickListener != null) {
+                    mOnRecyclerViewItemClickListener.onItemClick((ListNews.StoriesEntity) ((HashMap) v.getTag()).get("data"));
+                }
+            }
+        });
         holder.itemView.setOnLongClickListener(this);
         holder.tv_title.setText(mDatas.get(position).getTitle());
         holder.iv_poster.setImageURI(Uri.parse(mDatas.get(position).getImages().get(0)));
@@ -62,6 +72,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         data.put("data", mDatas.get(position));
         holder.itemView.setTag(data);
 
+    }
+
+    private SimpleDraweeView sv;
+
+    public SimpleDraweeView getSv(){
+        return sv;
     }
 
     @Override
@@ -72,7 +88,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onClick(View v) {
         if (mOnRecyclerViewItemClickListener != null) {
-            if (mFragment.getClass().equals(NewsListFragment.class)){}
             mOnRecyclerViewItemClickListener.onItemClick((ListNews.StoriesEntity) ((HashMap) v.getTag()).get("data"));
         }
     }
