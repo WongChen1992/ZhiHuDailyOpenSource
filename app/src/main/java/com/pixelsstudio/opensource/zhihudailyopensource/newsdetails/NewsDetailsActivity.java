@@ -47,16 +47,16 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
         int id = getIntent().getExtras().getInt("id");
         mPresenter.getData(id);
 
-        ViewCompat.setTransitionName(iv_poster, "img");
-
-//        Slide slide = new Slide();
-//        slide.setDuration(500);
+//        ViewCompat.setTransitionName(iv_poster, "img");
 //
-        ChangeBounds changeBounds = new ChangeBounds();
-        changeBounds.setDuration(500);
-//
-//        getWindow().setEnterTransition(slide);
-        getWindow().setSharedElementEnterTransition(changeBounds);
+////        Slide slide = new Slide();
+////        slide.setDuration(500);
+////
+//        ChangeBounds changeBounds = new ChangeBounds();
+//        changeBounds.setDuration(500);
+////
+////        getWindow().setEnterTransition(slide);
+//        getWindow().setSharedElementEnterTransition(changeBounds);
     }
 
     @Override

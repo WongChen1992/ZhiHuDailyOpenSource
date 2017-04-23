@@ -26,7 +26,6 @@ import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapterWrapp
 import com.pixelsstudio.opensource.zhihudailyopensource.base.BaseFragment;
 import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
 import com.pixelsstudio.opensource.zhihudailyopensource.newsdetails.NewsDetailsActivity;
-import com.pixelsstudio.opensource.zhihudailyopensource.test.Ac2;
 import com.pixelsstudio.opensource.zhihudailyopensource.view.RecyclerViewMaster;
 
 import java.util.ArrayList;
@@ -78,16 +77,16 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 //                SimpleDraweeView sdv = (SimpleDraweeView) itemView.findViewById(R.id.iv_poster);
 //                SimpleDraweeView sdv = mNewsAdapter.getSv();
 
-                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
-                intent.putExtra("id",data.getId());
-                ViewCompat.setTransitionName( mNewsAdapter.getSv(), "img");
-                ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation(getActivity(),  mNewsAdapter.getSv(), "img");
-                ActivityCompat.startActivity(getActivity(),intent, options.toBundle());
-
-//                Intent intent = new Intent(mContext, NewsDetailsActivity.class);
+//                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
 //                intent.putExtra("id",data.getId());
-//                startActivity(intent);
+//                ViewCompat.setTransitionName( mNewsAdapter.getSv(), "img");
+//                ActivityOptions options = ActivityOptions
+//                        .makeSceneTransitionAnimation(getActivity(),  mNewsAdapter.getSv(), "img");
+//                ActivityCompat.startActivity(getActivity(),intent, options.toBundle());
+
+                Intent intent = new Intent(mContext, NewsDetailsActivity.class);
+                intent.putExtra("id",data.getId());
+                startActivity(intent);
             }
         });
         mNewsAdapter.setOnRecyclerViewItemLongClickListener(new NewsAdapter.OnRecyclerViewItemLongClickListener() {

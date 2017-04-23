@@ -27,10 +27,6 @@
         <activity
             android:name=".helpandfeedback.SettingsActivity"
             android:screenOrientation="portrait"></activity>
-
-        <activity android:name=".test.Ac1"></activity>
-
-        <activity android:name=".test.Ac2"></activity>
     </application>
 
 </manifest>
