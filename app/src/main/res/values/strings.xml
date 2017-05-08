@@ -8,4 +8,6 @@
     <string name="feedback">反馈</string>
     <string name="settings">设置</string>
     <string name="delete">删除 </string>
+
+    <string name="data_empty">没有相关数据</string>
 </resources>

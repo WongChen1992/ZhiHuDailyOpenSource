@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:layout_marginRight="16dp"
             android:textColor="@color/colorTextTitle"
-            android:textSize="@dimen/testSizeHeading" />
+            android:textSize="@dimen/textSizeHeading" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_poster"

@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.pixelsstudio.opensource.zhihudailyopensource.R;
 import com.pixelsstudio.opensource.zhihudailyopensource.adapter.NewsAdapter;
@@ -44,6 +46,8 @@ public class StarredFragment extends BaseFragment implements StarredContract.Vie
 
         mRecyclerView = (RecyclerViewMaster) mView.findViewById(R.id.rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        View viewEmpty = LayoutInflater.from(mContext).inflate(R.layout.layout_empty, null);
+        mRecyclerView.setEmptyView(viewEmpty);
 
         mNewsAdapter = new NewsAdapter(mContext,mDatas,this);
         mNewsAdapter.setOnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {

@@ -58,8 +58,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("====","ggg");
-                sv = holder.iv_poster;
                 if (mOnRecyclerViewItemClickListener != null) {
                     mOnRecyclerViewItemClickListener.onItemClick((ListNews.StoriesEntity) ((HashMap) v.getTag()).get("data"));
                 }
@@ -72,12 +70,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         data.put("data", mDatas.get(position));
         holder.itemView.setTag(data);
 
-    }
-
-    private SimpleDraweeView sv;
-
-    public SimpleDraweeView getSv(){
-        return sv;
     }
 
     @Override

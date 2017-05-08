@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 /**
  * Created by WongChen on 2017/1/12.
@@ -67,9 +69,10 @@ public class RecyclerViewMaster extends RecyclerView {
         addItemDecoration(mDividerDecoration);
     }
 
-    public void setmEmptyView(View emptyView) {
+    public void setEmptyView(View emptyView) {
+        RelativeLayout.LayoutParams rlParams=new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
         mEmptyView = emptyView;
-        ((ViewGroup) this.getRootView()).addView(mEmptyView);
+        ((ViewGroup) this.getRootView()).addView(mEmptyView,rlParams);
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
