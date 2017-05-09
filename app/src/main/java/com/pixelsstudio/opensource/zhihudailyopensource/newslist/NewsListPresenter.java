@@ -39,6 +39,10 @@ public class NewsListPresenter implements NewsListContract.Presenter {
             public void onResponse(Call<ListNews> call, Response<ListNews> response) {
                 date = response.body().getDate();
                 mDatas.clear();
+                ListNews.StoriesEntity storiesEntity = new ListNews.StoriesEntity();
+                storiesEntity.setType(1);
+                storiesEntity.setTitle(date);
+                mDatas.add(storiesEntity);
                 mDatas.addAll(response.body().getStories());
                 mNewsListView.upDateRecyclerView(mDatas);
                 mNewsListView.hideRefreshView();
@@ -61,6 +65,10 @@ public class NewsListPresenter implements NewsListContract.Presenter {
             @Override
             public void onResponse(Call<ListNews> call, Response<ListNews> response) {
                 date = response.body().getDate();
+                ListNews.StoriesEntity storiesEntity = new ListNews.StoriesEntity();
+                storiesEntity.setType(1);
+                storiesEntity.setTitle(date);
+                mDatas.add(storiesEntity);
                 mDatas.addAll(response.body().getStories());
                 mNewsListView.upDateRecyclerView(mDatas);
             }

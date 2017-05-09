@@ -65,8 +65,8 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
         mRecyclerView = (RecyclerViewMaster) mView.findViewById(R.id.rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        View viewEmpty = LayoutInflater.from(mContext).inflate(R.layout.layout_empty, null);
-        mRecyclerView.setEmptyView(viewEmpty);
+//        View viewEmpty = LayoutInflater.from(mContext).inflate(R.layout.layout_empty, null);
+//        mRecyclerView.setEmptyView(viewEmpty);
 
         mNewsAdapter = new NewsAdapter(mContext,mDatas,this);
         mNewsAdapter.setOnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
@@ -98,7 +98,7 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
                 showDialog();
             }
         });
-        mNewsAdapterWrapper = new NewsAdapterWrapper(mNewsAdapter);
+        mNewsAdapterWrapper = new NewsAdapterWrapper(mContext,mNewsAdapter,mDatas);
         View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_footer,mRecyclerView,false);
         mNewsAdapterWrapper.addFooterView(footerView);
         mNewsAdapterWrapper.setOnLoadMoreListener(new NewsAdapterWrapper.OnLoadMoreListener() {

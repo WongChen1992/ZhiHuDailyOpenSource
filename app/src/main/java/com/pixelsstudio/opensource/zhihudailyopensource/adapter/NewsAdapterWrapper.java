@@ -1,8 +1,17 @@
 package com.pixelsstudio.opensource.zhihudailyopensource.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.pixelsstudio.opensource.zhihudailyopensource.R;
+import com.pixelsstudio.opensource.zhihudailyopensource.jsonbean.ListNews;
+
+import java.util.List;
 
 /**
  * Created by WongChen on 2017/3/23.
@@ -11,20 +20,26 @@ import android.view.ViewGroup;
 public class NewsAdapterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private NewsAdapter mAdapter;
     private View mFooterView;
+    private List<ListNews.StoriesEntity> mData;
+    private Context mContext;
 
-    public NewsAdapterWrapper(NewsAdapter adapter) {
+    public NewsAdapterWrapper(Context context, NewsAdapter adapter, List<ListNews.StoriesEntity> data) {
         mAdapter = adapter;
+        mData = data;
+        mContext = context;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1) {
-            if (position == 0){
+            if (position == 0) {
                 mFooterView.setVisibility(View.GONE);
-            }else{
+            } else {
                 mFooterView.setVisibility(View.VISIBLE);
             }
             return ITEM_TYPE.FOOTER.ordinal();
+        } else if (mData.get(position).getType() == 1) {
+            return ITEM_TYPE.DATE.ordinal();
         } else {
             return ITEM_TYPE.NORMAL.ordinal();
         }
@@ -35,6 +50,10 @@ public class NewsAdapterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (viewType == ITEM_TYPE.FOOTER.ordinal()) {
             return new RecyclerView.ViewHolder(mFooterView) {
             };
+        } else if (viewType == ITEM_TYPE.DATE.ordinal()) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_date, parent, false);
+            NewsAdapterWrapper.DateViewHolder holder = new NewsAdapterWrapper.DateViewHolder(view);
+            return holder;
         } else {
             return mAdapter.onCreateViewHolder(parent, viewType);
         }
@@ -44,6 +63,13 @@ public class NewsAdapterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position == getItemCount() - 1) {
             mOnLoadMoreListener.onLoadMore();
+        } else if (mData.get(position).getType() == 1) {
+            String date = mData.get(position).getTitle();
+            StringBuilder sb = new StringBuilder(date);
+            sb.insert(5, "-");
+            sb.insert(7, "-");
+            date = sb.toString();
+            ((DateViewHolder) holder).tv_date.setText(date);
         } else {
             mAdapter.onBindViewHolder(((NewsAdapter.NewsViewHolder) holder), position);
         }
@@ -60,6 +86,7 @@ public class NewsAdapterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
     enum ITEM_TYPE {
+        DATE,
         FOOTER,
         NORMAL
     }
@@ -72,5 +99,14 @@ public class NewsAdapterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public interface OnLoadMoreListener {
         void onLoadMore();
+    }
+
+    class DateViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_date;
+
+        public DateViewHolder(View view) {
+            super(view);
+            tv_date = (TextView) view.findViewById(R.id.tv_date);
+        }
     }
 }
