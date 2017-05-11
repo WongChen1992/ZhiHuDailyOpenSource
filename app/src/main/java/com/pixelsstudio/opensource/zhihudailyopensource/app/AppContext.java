@@ -1,6 +1,7 @@
 package com.pixelsstudio.opensource.zhihudailyopensource.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -14,7 +15,14 @@ public class AppContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         Fresco.initialize(this);
         //TODO 初始化isReadDelete
+    }
+
+    private static Context context;
+
+    public static Context getContextObject(){
+        return context;
     }
 }

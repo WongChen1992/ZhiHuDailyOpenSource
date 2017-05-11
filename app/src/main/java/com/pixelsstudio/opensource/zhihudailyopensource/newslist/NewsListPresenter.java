@@ -64,6 +64,8 @@ public class NewsListPresenter implements NewsListContract.Presenter {
         call.enqueue(new Callback<ListNews>() {
             @Override
             public void onResponse(Call<ListNews> call, Response<ListNews> response) {
+                if(response.body() == null)
+                    return;
                 date = response.body().getDate();
                 ListNews.StoriesEntity storiesEntity = new ListNews.StoriesEntity();
                 storiesEntity.setType(1);
