@@ -15,6 +15,8 @@ public class NewsDetailsContract {
         void showNewsDetails(NewsDetails data);
         void setStarredImg(boolean isStarred);
         void setCollectionImg(boolean isCollection);
+        void setStarredVisible(boolean isVisible);
+        void setCollectionVisible(boolean isVisible);
         void showToast(String str);
     }
 

@@ -61,8 +61,6 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
 
     @Override
     public void showNewsDetails(NewsDetails data) {
-        mPresenter.checkCollection(mAppContext);
-        mPresenter.checkStarred(mAppContext);
         iv_poster.setImageURI(Uri.parse(data.getImage()));
         String htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\""+data.getCss().get(0)+"\" />" + data.getBody();
         wevView.loadDataWithBaseURL(null, htmlData, "text/html", "utf-8", null);
@@ -91,6 +89,16 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
     }
 
     @Override
+    public void setStarredVisible(boolean isVisible) {
+        menuItemStarred.setVisible(isVisible);
+    }
+
+    @Override
+    public void setCollectionVisible(boolean isVisible) {
+        menuItemCollection.setVisible(isVisible);
+    }
+
+    @Override
     public void showToast(String str) {
         Snackbar.make(getWindow().getDecorView(), str, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
@@ -106,6 +114,8 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
         getMenuInflater().inflate(R.menu.single_menu, menu);
         menuItemStarred = menu.findItem(R.id.starred);
         menuItemCollection = menu.findItem(R.id.collection);
+        mPresenter.checkCollection(mAppContext);
+        mPresenter.checkStarred(mAppContext);
         return true;
     }
 
@@ -124,8 +134,7 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsCont
 
     @Override
     public boolean onSupportNavigateUp() {
-//        finishAfterTransition();
-        ActivityCompat.finishAfterTransition(this);
+        finish();
         return super.onSupportNavigateUp();
     }
 }

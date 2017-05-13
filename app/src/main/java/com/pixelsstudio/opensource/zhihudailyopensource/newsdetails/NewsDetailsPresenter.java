@@ -18,7 +18,7 @@ import static com.facebook.common.internal.Preconditions.checkNotNull;
  * Created by WongChen on 2017/2/22.
  */
 
-public class NewsDetailsPresenter implements NewsDetailsContract.Presenter{
+public class NewsDetailsPresenter implements NewsDetailsContract.Presenter {
     private final NewsDetailsContract.View mNewsDetailsView;
     private NewsDetails mNewsDetails;
     private ListNews.StoriesEntity mNewsBean;
@@ -53,50 +53,58 @@ public class NewsDetailsPresenter implements NewsDetailsContract.Presenter{
 
     @Override
     public void starred(Context context, boolean isCheck) {
-        if (isCheck){
-            if( SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_STARRED,new String[]{Integer.toString(mNewsDetails.getId())}) != 0){
+        if (isCheck) {
+            if (SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_STARRED, new String[]{Integer.toString(mNewsDetails.getId())}) != 0) {
                 mNewsDetailsView.showToast("删除成功");
                 mNewsDetailsView.setStarredImg(false);
-            }else{
+            } else {
                 mNewsDetailsView.showToast("删除失败");
             }
             return;
         }
-        if(SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_STARRED,mNewsDetails.getId(),mNewsBean) != -1){
+        if (SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_STARRED, mNewsDetails.getId(), mNewsBean) != -1) {
             mNewsDetailsView.showToast("添加成功");
             mNewsDetailsView.setStarredImg(true);
-        }else{
+        } else {
             mNewsDetailsView.showToast("添加失败");
         }
     }
 
     @Override
     public void collection(Context context, boolean isCheck) {
-        if (isCheck){
-            if( SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_COLLECTION,new String[]{Integer.toString(mNewsDetails.getId())}) != 0){
+        if (isCheck) {
+            if (SQLiteDBHelper.getInstens(context).delete(SQLiteDBHelper.TABLE_COLLECTION, new String[]{Integer.toString(mNewsDetails.getId())}) != 0) {
                 mNewsDetailsView.showToast("删除成功");
                 mNewsDetailsView.setCollectionImg(false);
-            }else{
+            } else {
                 mNewsDetailsView.showToast("删除失败");
             }
             return;
         }
-        if(SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_COLLECTION,mNewsDetails.getId(),mNewsBean) != -1){
+        if (SQLiteDBHelper.getInstens(context).insert(SQLiteDBHelper.TABLE_COLLECTION, mNewsDetails.getId(), mNewsBean) != -1) {
             mNewsDetailsView.showToast("添加成功");
             mNewsDetailsView.setCollectionImg(true);
-        }else{
+        } else {
             mNewsDetailsView.showToast("添加失败");
         }
     }
 
     @Override
     public void checkStarred(Context context) {
+        if (mNewsDetails == null) {
+            mNewsDetailsView.setStarredVisible(false);
+            return;
+        }
         boolean isStarred = SQLiteDBHelper.getInstens(context).query(SQLiteDBHelper.TABLE_STARRED, new String[]{String.valueOf(mNewsDetails.getId())});
         mNewsDetailsView.setStarredImg(isStarred);
     }
 
     @Override
     public void checkCollection(Context context) {
+        if (mNewsDetails == null) {
+            mNewsDetailsView.setCollectionVisible(false);
+            return;
+        }
         boolean isCollection = SQLiteDBHelper.getInstens(context).query(SQLiteDBHelper.TABLE_COLLECTION, new String[]{String.valueOf(mNewsDetails.getId())});
         mNewsDetailsView.setCollectionImg(isCollection);
     }
