@@ -24,21 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static API mRestAPI;
 
-    //有无网络都将缓存的拦截器
-//    private static Interceptor netInterceptor = new Interceptor() {
-//        @Override
-//        public Response intercept(Chain chain) throws IOException {
-//            Request request = chain.request();
-//            Response response = chain.proceed(request);
-//            int maxAge = 60 * 60 * 24 * 7;//缓存过期时间为七天
-//            return response.newBuilder()
-//                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-//                    .removeHeader("Cache-Control")
-//                    .header("Cache-Control", "public, max-age=" + maxAge)
-//                    .build();
-//        }
-//    };
-
     //拦截器
     private static Interceptor netInterceptor = new Interceptor() {
         @Override

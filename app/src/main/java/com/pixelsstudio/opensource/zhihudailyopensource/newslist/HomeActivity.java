@@ -94,7 +94,9 @@ public class HomeActivity extends BaseActivity {
                 intent.setClass(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.download:
+                download();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -124,5 +126,9 @@ public class HomeActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             return titles.get(position);
         }
+    }
+
+    private void download(){
+
     }
 }

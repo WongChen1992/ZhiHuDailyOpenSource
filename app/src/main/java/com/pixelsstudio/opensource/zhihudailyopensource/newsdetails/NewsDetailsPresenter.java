@@ -34,6 +34,8 @@ public class NewsDetailsPresenter implements NewsDetailsContract.Presenter{
         call.enqueue(new Callback<NewsDetails>() {
             @Override
             public void onResponse(Call<NewsDetails> call, Response<NewsDetails> response) {
+                if (response.body() == null)
+                    return;
                 mNewsDetails = response.body();
                 mNewsBean = new ListNews.StoriesEntity();
                 mNewsBean.setId(mNewsDetails.getId());
