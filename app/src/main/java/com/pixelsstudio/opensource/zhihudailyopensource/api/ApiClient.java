@@ -55,7 +55,7 @@ public class ApiClient {
     public static API getAPI() {
         if (mRestAPI == null) {
             File cacheFile = new File(AppContext.getContextObject().getCacheDir(), "newsList");
-            Cache cache = new Cache(cacheFile, 1024 * 1024 * 10); //10Mb
+            Cache cache = new Cache(cacheFile, 1024 * 1024 * 50); //50Mb
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(netInterceptor)
                     .addNetworkInterceptor(netInterceptor)
